@@ -23,10 +23,10 @@ class TooltipHelperTest < ActionView::TestCase
   end
   
   def test_close_tooltip_link
-    expected = "<a href=\"#\" onclick=\"$('tooltip_first').hide(); return false;\">close</a>"   
+    expected = "<a href=\"#\" onclick=\"$(&#x27;tooltip_first&#x27;).hide(); return false;\">close</a>"   
     assert_equal expected.strip, close_tooltip_link(:first);
     
-    expected = "<a href=\"#\" onclick=\"$('tooltip_second').hide(); return false;\">chiudi</a>"   
+    expected = "<a href=\"#\" onclick=\"$(&#x27;tooltip_second&#x27;).hide(); return false;\">chiudi</a>"   
     assert_equal expected.strip, close_tooltip_link(:second, 'chiudi');
   end
  

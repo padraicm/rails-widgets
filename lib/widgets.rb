@@ -1,3 +1,8 @@
+# Rails 3 bits
+require 'widgets/engine'
+require 'widgets/railtie'
+require 'widgets/version'
+
 # Widgets
 require 'widgets/core'
 require 'widgets/css_template'
@@ -44,4 +49,3 @@ ActionController::Base.helper Widgets::SpiffyCorners::SpiffyCornersHelper
 ##### UtilsHelper #####
 require 'widgets/utils_helper'
 ActionController::Base.helper Widgets::UtilsHelper
-

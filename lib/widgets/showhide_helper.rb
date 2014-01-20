@@ -9,7 +9,7 @@ module Widgets
       hide_link_id = opts[:hide_link_id] || dom_hide_id(record,name)
 
       html = opts[:html] || {} # setup default html options
-      html[:id] ||= dom_show_id(record,name)
+      html[:id] ||= dom_show_id(record, name)
       html[:class] ||= "#{name}_show_link"
 
       link_to_function link_name, nil, html do |page|
@@ -70,9 +70,17 @@ module Widgets
 
     def normalize_dom_id object, prefix
       if object.kind_of?(ActiveRecord::Base)
-        dom_id(object, "#{prefix}_for#{object.id ? '' : '_new'}")
+        dom_id(object, "#{prefix}_for#{object.new_record? ? '_new' : ''}")
       else
-        [ prefix, 'for', normalize_class_name(object) ].compact * '_'
+        new_record = ''
+        if object.respond_to?(:new_record?)
+          new_record = 'new_' if object.new_record?
+        end
+        object_id = ''
+        if object.respond_to?(:attributes)
+          object_id = "_#{object.attributes[:id]}" if object.attributes[:id]
+        end
+        [ prefix, 'for', new_record << normalize_class_name(object) << object_id ].compact * '_'
       end
     end
 

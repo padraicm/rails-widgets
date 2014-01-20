@@ -27,6 +27,7 @@ module Widgets
     end
     
     class Tableizer
+      include ::ActionView::Helpers::CaptureHelper
       
       def initialize(collection, opts, template, &block)
         parse_args(collection, opts, template, &block)
@@ -73,7 +74,7 @@ module Widgets
       end
       
       def flush_to_template
-        concat(@buffer)
+        concat(@buffer.html_safe)
       end
       
       def opening_table_tags
@@ -125,11 +126,11 @@ module Widgets
       end
       
       def empty_cell
-        content_tag('td', '&nbsp;', :class => 'blank')
+        content_tag('td', '&nbsp;'.html_safe, :class => 'blank')
       end
       
       def generate_cell(item)
-        @buffer << content_tag('td', capture(item, &@block))
+        @buffer << content_tag('td', capture(item, &@block).html_safe)
       end
       
       def wrap_to_new_row_if_required
