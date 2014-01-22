@@ -14,7 +14,7 @@ module ActionView
         end 
         javascript_include_tag_without_widgets(*sources)
       end
-      alias_method_chain :javascript_include_tag, :widgets 
+      # alias_method_chain :javascript_include_tag, :widgets 
     end
   end
 end
