@@ -44,8 +44,10 @@ module Widgets
         else
           if !item.function.blank?
             safe_concat link_to_function(item.name, item.function, item.html)
-          else
+          elsif item.link?
             safe_concat link_to(item.name, item.link, item.html)
+          else
+            safe_concat item.name
           end
         end
         safe_concat @_navigation.separator unless index == @_navigation.items.size - 1
